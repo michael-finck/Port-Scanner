@@ -1,0 +1,17 @@
+import socket
+
+host = input('Enter the IP address to scan: ')
+range = input('Enter the port range to scan (example: 1-65536): ')
+lowport = int(range.split('-')[0])
+highport = int(range.split('-')[1])
+
+print('Scanning host: ',host, 'from port '),lowpot, 'to port ', highport)
+
+for port in range(lowport, highport):
+  s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+  status = s.connect_ex((host, port))
+  if (status == 0):
+    print('*** Port ',port,'- OPEN ***')
+  else:
+    print('Port ', port,' - CLOSED')
+  s.close()
